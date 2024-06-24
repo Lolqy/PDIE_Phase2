@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Sign Up</title>
+    <!-- Use Django's static template tag to load static files -->
+    <link rel="stylesheet" href="{% static 'css/stylelogin.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #8c7851;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-button:hover {
+            background-color: #716040;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{% url 'index' %}" class="home-button">Home</a>
+    <div class="container" id="container">
+        <!-- Sign Up Form -->
+        <div class="form-container sign-up">
+            <!-- Use Django's URL template tag to handle form submission -->
+            <form action="{% url 'signup' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="WorkersId" placeholder="WorkersId">
+                <input type="text" name="user_name" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="first_name" placeholder="First Name">
+                <input type="text" name="sec_name" placeholder="Second Name">
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="form-container sign-in">
+            <!-- Use Django's URL template tag to handle form submission -->
+            <form id="registerForm" action="" method="POST" onsubmit="displayMessage(event)">
+                {% csrf_token %}
+                
+                <input type="text" name="user_name" placeholder="user_name" >
+                <input type="password" name="password" placeholder="password" >
+                
+                <button type="submit">Login</button>
+                {{ message }}
+            </form>
+        </div>
+
+        <!-- Toggle Panels -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal details to use all site features</p>
+                    <!-- Use JavaScript for form toggle functionality -->
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with your personal details to use all site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Django's static template tag for JavaScript -->
+    <script src="{% static 'javascript/scriptlogin.js' %}"></script>
+</body>
+
+</html>
